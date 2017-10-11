@@ -8,7 +8,6 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("PlayerController begin play"))
 	if (GetControlledTank())
 	{
 		auto PossessedTank = GetControlledTank();
