@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "Runtime/Engine/Classes/Engine/World.h"
 #include "Tank.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
@@ -15,8 +15,10 @@ class BATTLETANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 
+public:
 	void BeginPlay() override;
 	
+private:
 	ATank* GetAITank() const;
-	
+	ATank* GetPlayerTank() const;
 };
