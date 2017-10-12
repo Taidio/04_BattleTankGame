@@ -21,4 +21,7 @@ public:
 private:
 	ATank* GetAITank() const;
 	ATank* GetPlayerTank() const;
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 };

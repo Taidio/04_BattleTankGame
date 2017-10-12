@@ -40,8 +40,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 	FVector HitLocation; //out parameter
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("You aim towards: %s"),*HitLocation.ToString())
-
+		GetControlledTank()->AimAt(HitLocation);
 	}
 
 }
@@ -55,7 +54,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation) con
 	if (DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation, WorldDirection))
 	{
 		FHitResult Hit;
-		FVector Start = WorldLocation;
+		FVector Start = PlayerCameraManager->GetCameraLocation();
 		FVector End = Start + WorldDirection * LineTraceRange;
 		if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility))
 		{
@@ -64,7 +63,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation) con
 		}
 	}
 	OutHitLocation = FVector(0);
-	return false;
+	return true;
 }
 
 

@@ -18,6 +18,13 @@ void ATankAIController::BeginPlay()
 	}
 }
 
+// Called every frame
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (!GetPlayerTank()) { return; }
+	GetAITank()->AimAt(GetPlayerTank()->GetTargetLocation());
+}
 
 ATank* ATankAIController::GetAITank() const
 {
