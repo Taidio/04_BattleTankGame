@@ -21,7 +21,10 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	void BeginPlay() override;
 
+
 private:
-	//Make the tank movin the barrel so that it is pointed where the crosshair is pointing
+	//Make the tank move the barrel so that it is pointed where the crosshair is pointing at
 	void AimTowardsCrosshair();
+
+	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
 };
