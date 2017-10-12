@@ -40,7 +40,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 	FVector HitLocation; //out parameter
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *HitLocation.ToString())
+		UE_LOG(LogTemp, Warning, TEXT("You aim towards: %s"),*HitLocation.ToString())
 
 	}
 
@@ -50,10 +50,21 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation) con
 {
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
-
 	FVector2D ScreenLocation(ViewportSizeX*CrossHairXLocation, ViewportSizeY*CrossHairYLocation);
-	UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *ScreenLocation.ToString())
-	return true;
+	FVector WorldLocation, WorldDirection;
+	if (DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, WorldLocation, WorldDirection))
+	{
+		FHitResult Hit;
+		FVector Start = WorldLocation;
+		FVector End = Start + WorldDirection * LineTraceRange;
+		if (GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility))
+		{
+			OutHitLocation = Hit.Location;
+			return true;
+		}
+	}
+	OutHitLocation = FVector(0);
+	return false;
 }
 
 
