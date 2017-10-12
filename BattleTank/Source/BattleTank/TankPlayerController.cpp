@@ -40,7 +40,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 	FVector HitLocation; //out parameter
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *HitLocation.ToString())
+		UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *HitLocation.ToString())
 
 	}
 
@@ -48,24 +48,12 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation) const
 {
-	FHitResult Hit;
-	if (GetWorld()->LineTraceSingleByChannel(
-		Hit,
-		GetControlledTank()->GetActorLocation(),
-		GetControlledTank()->GetActorLocation() * 10000,
-		ECollisionChannel::ECC_WorldStatic,
-		FCollisionQueryParams(),
-		FCollisionResponseParams(ECollisionResponse::ECR_Block))
-		)
-	{
-		return true;
-		OutHitLocation = Hit.Location;
-	}
-	else
-	{
-		return false;
-	}
-	
+	int32 ViewportSizeX, ViewportSizeY;
+	GetViewportSize(ViewportSizeX, ViewportSizeY);
+
+	FVector2D ScreenLocation(ViewportSizeX*CrossHairXLocation, ViewportSizeY*CrossHairYLocation);
+	UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *ScreenLocation.ToString())
+	return true;
 }
 
 
