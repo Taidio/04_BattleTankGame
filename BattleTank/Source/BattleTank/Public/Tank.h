@@ -1,13 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "Engine/World.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
 class UTankTurret;
 class UTankBarrel;
+class AProjectile;
 class UTankAimingComponent;
 
 UCLASS()
@@ -41,4 +42,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 50000;
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> Projectile_Blueprint;
+
+	UTankBarrel *Barrel = nullptr;
 };
