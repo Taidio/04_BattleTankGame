@@ -2,6 +2,7 @@
 
 #include "Tank.h"
 #include "TankAimingComponent.h"
+#include "MyProjectileMovementComponent.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
 
@@ -44,10 +45,11 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet)
 
 void ATank::Fire()
 {
-	UE_LOG(LogTemp,Warning,TEXT("Firing!"))
 	if (!Barrel) { return; }
 	//spawning Projectiles in front of Barrel
 	FVector Location = Barrel->GetSocketLocation(FName("Projectile"));
 	FRotator Rotation = Barrel->GetSocketRotation(FName("Projectile"));
-	GetWorld()->SpawnActor<AProjectile>(Projectile_Blueprint, Location, Rotation);
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_Blueprint, Location, Rotation);
+
+	Projectile->LaunchProjectile(LaunchSpeed);
 }

@@ -30,6 +30,7 @@ public:
 protected:
 	UTankAimingComponent *TankAimingComponent = nullptr;
 
+
 private:
 	// Sets default values for this pawn's properties
 	ATank();
@@ -41,7 +42,7 @@ private:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;	
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 50000;
+	float LaunchSpeed = 10000;
 
 	UPROPERTY(EditAnywhere, Category = Setup)
 	TSubclassOf<AProjectile> Projectile_Blueprint;
