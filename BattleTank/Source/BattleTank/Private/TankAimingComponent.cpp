@@ -28,7 +28,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	FVector End = HitLocation;
 
 	//Calculate the OutLaunchVelocity
-	if (UGameplayStatics::SuggestProjectileVelocity(this, OutLaunchVelocity, Start, End, LaunchSpeed, ESuggestProjVelocityTraceOption::DoNotTrace)) 
+	if (UGameplayStatics::SuggestProjectileVelocity(this, OutLaunchVelocity, Start, End, LaunchSpeed, false, 0, 0, ESuggestProjVelocityTraceOption::DoNotTrace)) 
 	{
 		auto TankName = GetOwner()->GetName();
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
