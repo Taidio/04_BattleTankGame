@@ -19,13 +19,6 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere, Category = Degrees)
-	float MaxDegreesPerSecond = 40;
+	float MaxDegreesPerSecond = 60;
 
-	UPROPERTY(EditAnywhere, Category = Degrees)
-	float MinimumDegreesAzimuth = -180;
-
-	UPROPERTY(EditAnywhere, Category = Degrees)
-	float MaximumDegreesAzimuth = 180;
-	
-	
 };

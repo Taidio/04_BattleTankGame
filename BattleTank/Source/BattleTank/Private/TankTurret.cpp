@@ -10,9 +10,9 @@ void UTankTurret::Azimuth(float RelativeSpeed)
 	auto AzimuthChange = RelativeSpeed*MaxDegreesPerSecond * GetWorld()->DeltaTimeSeconds;
 	auto RawNewAzimuth = RelativeRotation.Yaw + AzimuthChange;
 	
-	RawNewAzimuth = FMath::Clamp<float>(RawNewAzimuth, MinimumDegreesAzimuth, MaximumDegreesAzimuth);
+
 	SetRelativeRotation(FRotator(0, RawNewAzimuth,0));
-	UE_LOG(LogTemp, Warning, TEXT("TurretAzimuth: %f"),RawNewAzimuth)
+
 }
 
 
