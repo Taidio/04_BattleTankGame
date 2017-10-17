@@ -10,6 +10,7 @@ class UTankTurret;
 class UTankBarrel;
 class AProjectile;
 class UTankAimingComponent;
+class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -29,7 +30,9 @@ public:
 
 protected:
 	UTankAimingComponent *TankAimingComponent = nullptr;
-
+	
+	UPROPERTY(BlueprintReadOnly, Category = Movement)
+	UTankMovementComponent *TankMovementComponent = nullptr;
 
 private:
 	// Sets default values for this pawn's properties
@@ -42,7 +45,7 @@ private:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;	
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
-	float ReloadTimeInSecond = 3;
+	float ReloadTimeInSecond = 2;
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 10000;
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
